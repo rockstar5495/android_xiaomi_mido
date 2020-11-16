@@ -34,11 +34,81 @@
 #include "log/log.h"
 
 #define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
+#include <sys/stat.h>
+#include <sys/types.h>
 #include <sys/_system_properties.h>
+
+#include <android-base/properties.h>
+#include "property_service.h"
+#include "vendor_init.h"
 
 char const *heaptargetutilization;
 char const *heapminfree;
 char const *heapmaxfree;
+
+using android::init::property_set;
+
+void property_override(char const prop[], char const value[])
+{
+    prop_info *pi;
+
+    pi = (prop_info*) __system_property_find(prop);
+    if (pi)
+        __system_property_update(pi, value, strlen(value));
+    else
+        __system_property_add(prop, strlen(prop), value, strlen(value));
+}
+
+void property_override_dual(char const system_prop[], char const vendor_prop[],
+    char const value[])
+{
+    property_override(system_prop, value);
+    property_override(vendor_prop, value);
+}
+
+          /* From Magisk@jni/magiskhide/hide_utils.c */
+static const char *snet_prop_key[] = {
+    "ro.boot.vbmeta.device_state",
+    "ro.boot.verifiedbootstate",
+    "ro.boot.flash.locked",
+    "ro.boot.selinux",
+    "ro.boot.veritymode",
+    "ro.boot.warranty_bit",
+    "ro.warranty_bit",
+    "ro.debuggable",
+    "ro.secure",
+    "ro.build.type",
+    "ro.build.tags",
+    "ro.build.selinux",
+    NULL
+};
+
+ static const char *snet_prop_value[] = {
+    "locked",
+    "green",
+    "1",
+    "enforcing",
+    "enforcing",
+    "0",
+    "0",
+    "0",
+    "1",
+    "user",
+    "release-keys",
+    "1",
+    NULL
+};
+
+ static void workaround_snet_properties() {
+
+     // Hide all sensitive props
+    for (int i = 0; snet_prop_key[i]; ++i) {
+        property_override(snet_prop_key[i], snet_prop_value[i]);
+    }
+
+     chmod("/sys/fs/selinux/enforce", 0640);
+    chmod("/sys/fs/selinux/policy", 0440);
+}
 
 void check_device()
 {
@@ -80,4 +150,17 @@ void vendor_load_properties()
     property_override("dalvik.vm.heaptargetutilization", heaptargetutilization);
     property_override("dalvik.vm.heapminfree", heapminfree);
     property_override("dalvik.vm.heapmaxfree", heapmaxfree);
+    property_set("dalvik.vm.heapstartsize", "8m");
+    property_set("dalvik.vm.heapgrowthlimit", "192m");
+    property_set("dalvik.vm.heapsize", "512m");
+    property_set("dalvik.vm.heaptargetutilization", heaptargetutilization);
+    property_set("dalvik.vm.heapminfree", heapminfree);
+    property_set("dalvik.vm.heapmaxfree", heapmaxfree);
+
+
+    // Disable OEM unlocking in dev options
+    property_override("ro.oem_unlock_supported", "0");
+
+    // Workaround SafetyNet
+    workaround_snet_properties();
 }
