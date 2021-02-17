@@ -28,7 +28,7 @@ $(call inherit-product, vendor/xtended/config/common_full_phone.mk)
 XTENDED_BUILD_TYPE := UnOfficial
 
 # Maintainer
-XTENDED_MAINTAINER := Pratyaksh_Bharadwaj
+XTENDED_MAINTAINER := 🔥Pratyaksh💥Bharadwaj🔥
 
 # GApps
 TARGET_GAPPS_ARCH := arm64
