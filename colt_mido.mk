@@ -22,16 +22,19 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, device/xiaomi/mido/device.mk)
 
 # Inherit some common ColtOS stuff.
-$(call inherit-product, vendor/colt/config/common_full_phone.mk)
+$(call inherit-product, vendor/colt/config/common.mk)
 
 # Official
 COLT_BUILD_TYPE := UnOfficial
 
 # Maintainer
-COLT_DEVICE_MAINTAINER := Pratyaksh_Bharadwaj
+COLT_DEVICE_MAINTAINER := 🔥Pratyaksh💥Bharadwaj🔥
 
 # GApps
 TARGET_GAPPS_ARCH := arm64
+
+# Mido bootanimation flag
+TARGET_BOOT_ANIMATION_RES := 1080x1920
 
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := mido
