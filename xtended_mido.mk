@@ -33,6 +33,9 @@ XTENDED_MAINTAINER := 🔥Pratyaksh💥Bharadwaj🔥
 # GApps
 TARGET_GAPPS_ARCH := arm64
 
+# Mido bootanimation flag
+TARGET_BOOT_ANIMATION_RES := 1080
+
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := mido
 PRODUCT_NAME := xtended_mido
