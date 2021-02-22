@@ -239,3 +239,8 @@ on boot
 # Backlight Dimmer
   chown system system /sys/module/mdss_fb/parameters/backlight_dimmer
   chmod 0660 /sys/module/mdss_fb/parameters/backlight_dimmer
+
+on property:sys.boot_completed=1
+  # Restrict permissions to socket file
+  # to hide Magisk & co.
+  chmod 440 /proc/net/unix
