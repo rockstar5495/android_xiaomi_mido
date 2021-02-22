@@ -8,6 +8,6 @@
    "repository"  : "vendor_xiaomi_mido",
    "target_path" : "vendor/xiaomi"
    "remote"      : "rockstar5495"
-   "branch"      : "r11"
+   "branch"      : "11"
  }
 ]

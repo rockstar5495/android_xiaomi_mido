@@ -21,24 +21,27 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 # Inherit from mido device
 $(call inherit-product, device/xiaomi/mido/device.mk)
 
-# Inherit some common ColtOS stuff.
-$(call inherit-product, vendor/colt/config/common.mk)
+# Inherit some common Superior stuff.
+$(call inherit-product, vendor/superior/config/common.mk)
 
 # Official
-COLT_BUILD_TYPE := UnOfficial
+superior_BUILD_TYPE := UnOfficial
 
 # Maintainer
-COLT_DEVICE_MAINTAINER := 🔥Pratyaksh💥Bharadwaj🔥
+superior_DEVICE_MAINTAINER := 🔥Pratyaksh💥Bharadwaj🔥
 
 # GApps
 TARGET_GAPPS_ARCH := arm64
 
 # Mido bootanimation flag
-TARGET_BOOT_ANIMATION_RES := 1080x1920
+TARGET_BOOT_ANIMATION_RES := 1080
+
+# Screen Density
+TARGET_SCREEN_DENSITY := 420
 
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := mido
-PRODUCT_NAME := colt_mido
+PRODUCT_NAME := superior_mido
 PRODUCT_BRAND := Xiaomi
 PRODUCT_MODEL := Redmi Note 4
 PRODUCT_MANUFACTURER := Xiaomi
@@ -52,3 +55,6 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
 
 # Set BUILD_FINGERPRINT variable to be picked up by both system and vendor build.prop
 BUILD_FINGERPRINT := "xiaomi/mido/mido:7.0/NRD90M/V9.6.1.0.NCFMIFD:user/release-keys"
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.build.fingerprint=xiaomi/mido/mido:7.0/NRD90M/V9.6.1.0.NCFMIFD:user/release-keys 
