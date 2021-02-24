@@ -205,3 +205,7 @@ on boot
    write /sys/class/leds/vibrator/vmax_override 1
    chown root system /sys/class/timed_output/vibrator/vtg_level
    chmod 0660 /sys/class/timed_output/vibrator/vtg_level
+
+# FPS Info
+   chown system graphics /sys/class/graphics/fb0/measured_fps
+   chmod 0666 /sys/class/graphics/fb0/measurd_fps
