@@ -14,9 +14,9 @@
 # limitations under the License.
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/xtended_mido.mk
+    $(LOCAL_DIR)/fluid_mido.mk
 
 COMMON_LUNCH_CHOICES := \
-    xtended_mido-user \
-    xtended_mido-userdebug \
-    xtended_mido-eng
+    fluid_mido-user \
+    fluid_mido-userdebug \
+    fluid_mido-eng
